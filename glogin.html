@@ -1,0 +1,42 @@
+<html itemscope itemtype="http://schema.org/Article">
+
+<head>
+    <!-- BEGIN Pre-requisites -->
+    <script src="https://code.jquery.com/jquery-2.2.4.js">
+    </script>
+    <script src="https://apis.google.com/js/client:platform.js?onload=start" async defer>
+    </script>
+<script>
+    let auth2;
+    function start() {
+      gapi.load('auth2', function() {
+        auth2 = gapi.auth2.init({
+          client_id: '994186259491-l7r3mv92dbkmh6jo3cvaa1v760kc4d4h.apps.googleusercontent.com',
+          // Scopes to request in addition to 'profile' and 'email'
+          //scope: 'additional_scope'
+        });
+      });
+    }
+  </script>
+</head>
+<body>
+    <button id="signinButton">Sign in with Google</button>
+</body>
+    <script>
+      $('#signinButton').click(function() {
+        start();
+        // signInCallback defined in step 6.
+        auth2.grantOfflineAccess().then(signInCallback);
+      });
+      function signInCallback(authResult) {
+  if (authResult['code']) {
+
+    // Hide the sign-in button now that the user is authorized, for example:
+    $('#signinButton').attr('style', 'display: none');
+  } else {
+    // There was an error.
+    alert('error');
+  }
+}
+    </script>
+</html>
